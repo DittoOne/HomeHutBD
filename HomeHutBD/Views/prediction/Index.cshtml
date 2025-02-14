@@ -1,0 +1,52 @@
+﻿
+@model PropertyPredictionModel
+@{
+	
+
+<div class="container mt-5">
+    <h2>Property Price Prediction</h2>
+    
+    @using (Html.BeginForm("Predict", "Prediction", FormMethod.Post, new { @class = "mt-4" }))
+    {
+        <div class="form-group">
+            @Html.LabelFor(m => m.Beds, "Number of Bedrooms")
+            @Html.TextBoxFor(m => m.Beds, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Beds)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Baths, "Number of Bathrooms")
+            @Html.TextBoxFor(m => m.Baths, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Baths)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Size, "Size (sqft)")
+            @Html.TextBoxFor(m => m.Size, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Size)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Address, "Address")
+            @Html.TextBoxFor(m => m.Address, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Address)
+        </div>
+
+        <button type="submit" class="btn btn-primary">Predict Price</button>
+    }
+
+    @if (ViewBag.PredictedPrice != null)
+    {
+        <div class="mt-4 alert alert-success">
+            <h4>Predicted Price: $@ViewBag.PredictedPrice.ToString("N2")</h4>
+        </div>
+    }
+
+    @if (ViewBag.Error != null)
+    {
+        <div class="mt-4 alert alert-danger">
+            <h4>Error: @ViewBag.Error</h4>
+        </div>
+    }
+</div>
+}
