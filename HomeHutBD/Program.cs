@@ -28,10 +28,9 @@ builder.Services.AddIdentity<Users, IdentityRole>(options =>
 .AddEntityFrameworkStores<AppDbContext>()
 .AddDefaultTokenProviders();
 
-// Add Flask Service Manager
+
 builder.Services.AddHostedService<FlaskServiceManager>();
 
-// Add HTTP Client for Flask API communication
 builder.Services.AddHttpClient();
 
 var app = builder.Build();
@@ -39,14 +38,13 @@ var app = builder.Build();
 using (var scope = app.Services.CreateScope())
 {
     var flaskService = scope.ServiceProvider.GetRequiredService<IHostedService>() as FlaskServiceManager;
-    await Task.Delay(5000);  // Wait for Flask to start
+    await Task.Delay(5000);  
 }
 
-// Configure the HTTP request pipeline.
+
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 

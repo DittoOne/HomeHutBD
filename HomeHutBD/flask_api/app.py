@@ -1,4 +1,4 @@
-﻿# app.py
+﻿
 from math import ceil
 from flask import Flask, request, jsonify
 import joblib
@@ -8,7 +8,7 @@ from flask_cors import CORS
 import pandas as pd
 
 app = Flask(__name__)
-CORS(app)  # Allow ASP.NET to send requests
+CORS(app)  
   
 
 
