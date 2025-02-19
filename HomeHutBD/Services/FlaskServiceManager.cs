@@ -17,10 +17,10 @@ namespace HomeHutBD.Services
             public FlaskServiceManager(ILogger<FlaskServiceManager> logger)
             {
                 _logger = logger;
-                // Update these paths according to your environment
-                _pythonPath = @"C:\Users\User\AppData\Local\Programs\Python\Python312\python.exe";  // or full path to python.exe
+                
+                _pythonPath = @"C:\Users\User\AppData\Local\Programs\Python\Python312\python.exe";  
                 _flaskScriptPath = @"J:\HomeHutBD\HomeHutBD\flask_api\app.py";
-            // Use your actual project path
+            
         }
 
         public  Task StartAsync(CancellationToken cancellationToken)
@@ -37,7 +37,7 @@ namespace HomeHutBD.Services
                         RedirectStandardOutput = true,
                         RedirectStandardError = true,
                         CreateNoWindow = true,
-                        WorkingDirectory = @"J:\HomeHutBD\HomeHutBD\flask_api"  // Set the correct working directory
+                        WorkingDirectory = @"J:\HomeHutBD\HomeHutBD\flask_api" 
                     };
 
 

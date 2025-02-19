@@ -1,21 +1,23 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using HomeHutBD.Models;
 using Newtonsoft.Json;
+using System.Net.Http;
+using System.Text;
+using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
+
 namespace HomeHutBD.Controllers
 {
-    using System.Net.Http;
-    using System.Text;
-    using System.Threading.Tasks;
-
     public class PredictionController : Controller
     {
         private readonly HttpClient _httpClient;
-        // private readonly string _flaskApiUrl = "http://127.0.0.1:5000/predict";
+        private readonly string _flaskApiBaseUrl = "http://127.0.0.1:5000";
+        private readonly ILogger<PredictionController> _logger;
 
-
-        public PredictionController()
+        public PredictionController(ILogger<PredictionController> logger)
         {
             _httpClient = new HttpClient();
+            _logger = logger;
         }
 
         public IActionResult Index()
@@ -24,60 +26,70 @@ namespace HomeHutBD.Controllers
         }
 
         [HttpPost]
-        private async Task<bool> IsFlaskRunning()
-        {
-            try
-            {
-                var response = await _httpClient.GetAsync("http://127.0.0.1:5000/");
-                return response.IsSuccessStatusCode;
-            }
-            catch
-            {
-                return false;
-            }
-        }
-
         public async Task<IActionResult> Predict(PropertyPredictionModel model)
         {
-            if (!await IsFlaskRunning())
+            if (!ModelState.IsValid)
             {
-                ViewBag.Error = "Flask API is not running.";
                 return View("Index", model);
             }
 
-            var requestData = new
+            // Calculate beds to baths ratio
+            double bedsToBathsRatio = (double)model.beds / model.bath;
+
+            var requestDict = new Dictionary<string, object>
             {
-                address = model.Address,
-                type = model.Type,
-                size = model.Size,
-                beds = model.Beds,
-                bath = model.Bath,
-                beds_to_baths_ratio = model.Bath / (double)model.Beds
+                { "address", model.address },
+                { "type", model.type },
+                { "size(sqft)", model.size },
+                { "beds", model.beds },
+                { "bath", model.bath },
+                { "beds_to_baths_ratio", bedsToBathsRatio }
             };
 
-            var jsonRequest = JsonConvert.SerializeObject(requestData);
+            var jsonRequest = JsonConvert.SerializeObject(requestDict);
+            _logger.LogInformation($"Request payload: {jsonRequest}");
+
             var content = new StringContent(jsonRequest, Encoding.UTF8, "application/json");
 
             try
             {
-                var response = await _httpClient.PostAsync("http://127.0.0.1:5000/predict", content);
-                response.EnsureSuccessStatusCode();
-
+                var response = await _httpClient.PostAsync($"{_flaskApiBaseUrl}/predict", content);
                 var jsonResponse = await response.Content.ReadAsStringAsync();
-                var responseData = JsonConvert.DeserializeObject<dynamic>(jsonResponse);
+                _logger.LogInformation($"Response from Flask API: {jsonResponse}");
 
-                if (responseData != null && responseData.predicted_price != null)
+                if (!response.IsSuccessStatusCode)
                 {
-                    ViewBag.PredictedPrice = responseData.predicted_price;
+                    ViewBag.Error = $"Error from prediction service: {response.StatusCode}";
+                    return View("Index", model);
+                }
+
+                var predictionResponse = JsonConvert.DeserializeObject<PredictionResponse>(jsonResponse);
+
+                if (predictionResponse != null && predictionResponse.Status == "success" && predictionResponse.PredictedPrice.HasValue)
+                {
+                    _logger.LogInformation($"Setting ViewBag.PredictedPrice to: {predictionResponse.PredictedPrice}");
+                    ViewBag.PredictedPrice = predictionResponse.PredictedPrice.Value;
                 }
                 else
                 {
-                    ViewBag.Error = "Invalid response from Flask API.";
+                    _logger.LogError($"Invalid prediction response: {jsonResponse}");
+                    ViewBag.Error = "Invalid response from prediction service.";
                 }
+            }
+            catch (HttpRequestException ex)
+            {
+                _logger.LogError($"HTTP Request Error: {ex.Message}");
+                ViewBag.Error = "Unable to connect to prediction service. Please try again later.";
+            }
+            catch (JsonException ex)
+            {
+                _logger.LogError($"JSON Parsing Error: {ex.Message}");
+                ViewBag.Error = "Error processing service response. Please try again later.";
             }
             catch (Exception ex)
             {
-                ViewBag.Error = "Error connecting to Flask API: " + ex.Message;
+                _logger.LogError($"Unexpected Error: {ex.Message}");
+                ViewBag.Error = "An unexpected error occurred. Please try again later.";
             }
 
             return View("Index", model);

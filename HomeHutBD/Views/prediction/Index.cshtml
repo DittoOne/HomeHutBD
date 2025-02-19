@@ -1,57 +1,90 @@
-﻿
-@model PropertyPredictionModel
+﻿@model PropertyPredictionModel
 @{
-	
+    ViewData["Title"] = "Property Price Prediction";
+}
 
 <div class="container mt-5">
-    <h2>Property Price Prediction</h2>
-    
-    @using (Html.BeginForm("Predict", "Prediction", FormMethod.Post, new { @class = "mt-4" }))
-    {
-        <div class="form-group">
-            @Html.LabelFor(m => m.Beds, "Number of Bedrooms")
-            @Html.TextBoxFor(m => m.Beds, new { @class = "form-control" })
-            @Html.ValidationMessageFor(m => m.Beds)
-        </div>
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h2 class="mb-0">Property Price Prediction</h2>
+                </div>
+                <div class="card-body">
+                    @using (Html.BeginForm("Predict", "Prediction", FormMethod.Post, new { @class = "needs-validation" }))
+                    {
+                        @Html.AntiForgeryToken()
 
-        <div class="form-group">
-            @Html.LabelFor(m => m.Bath, "Number of Bathrooms")
-            @Html.TextBoxFor(m => m.Bath, new { @class = "form-control" })
-            @Html.ValidationMessageFor(m => m.Bath)
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(m => m.Type, "Type")
-            @Html.TextBoxFor(m => m.Type, new { @class = "form-control" })
-            @Html.ValidationMessageFor(m => m.Type)
-        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.beds, "Number of Bedrooms", new { @class = "form-label" })
+                                    @Html.TextBoxFor(m => m.beds, new { @class = "form-control", type = "number", min = "1", required = "required" })
+                                    @Html.ValidationMessageFor(m => m.beds, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
 
-        <div class="form-group">
-            @Html.LabelFor(m => m.Size, "Size (sqft)")
-            @Html.TextBoxFor(m => m.Size, new { @class = "form-control" })
-            @Html.ValidationMessageFor(m => m.Size)
-        </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.bath, "Number of Bathrooms", new { @class = "form-label" })
+                                    @Html.TextBoxFor(m => m.bath, new { @class = "form-control", type = "number", min = "1", required = "required" })
+                                    @Html.ValidationMessageFor(m => m.bath, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(m => m.Address, "Address")
-            @Html.TextBoxFor(m => m.Address, new { @class = "form-control" })
-            @Html.ValidationMessageFor(m => m.Address)
-        </div>
+                        <div class="mb-3">
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.type, "Property Type", new { @class = "form-label" })
+                                @Html.TextBoxFor(m => m.type, new { @class = "form-control", required = "required" })
+                                @Html.ValidationMessageFor(m => m.type, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
 
-        <button type="submit" class="btn btn-primary">Predict Price</button>
-    }
+                        <div class="mb-3">
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.size, "Size (sqft)", new { @class = "form-label" })
+                                @Html.TextBoxFor(m => m.size, new { @class = "form-control", type = "number", min = "100", required = "required" })
+                                @Html.ValidationMessageFor(m => m.size, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
 
-    @if (ViewBag.PredictedPrice != null)
-    {
-        <div class="mt-4 alert alert-success">
-            <h4>Predicted Price: $@ViewBag.PredictedPrice.ToString("N2")</h4>
-        </div>
-    }
+                        <div class="mb-3">
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.address, "Address", new { @class = "form-label" })
+                                @Html.TextBoxFor(m => m.address, new { @class = "form-control", required = "required" })
+                                @Html.ValidationMessageFor(m => m.address, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
 
-    @if (ViewBag.Error != null)
-    {
-        <div class="mt-4 alert alert-danger">
-            <h4>Error: @ViewBag.Error</h4>
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary">Predict Price</button>
+                        </div>
+                    }
+
+                    @if (ViewBag.PredictedPrice != null)
+                    {
+                        <div class="alert alert-success mt-4">
+                            <h4 class="alert-heading">Predicted Price</h4>
+                            <p class="mb-0">৳@ViewBag.PredictedPrice.ToString("N2")</p>
+                        </div>
+                    }
+
+                    @if (ViewBag.Error != null)
+                    {
+                        <div class="alert alert-danger mt-4">
+                            <h4 class="alert-heading">Error</h4>
+                            <p class="mb-0">@ViewBag.Error</p>
+                        </div>
+                    }
+                </div>
+            </div>
         </div>
-    }
+    </div>
 </div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }
