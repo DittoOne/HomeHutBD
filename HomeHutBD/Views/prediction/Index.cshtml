@@ -15,9 +15,14 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(m => m.Baths, "Number of Bathrooms")
-            @Html.TextBoxFor(m => m.Baths, new { @class = "form-control" })
-            @Html.ValidationMessageFor(m => m.Baths)
+            @Html.LabelFor(m => m.Bath, "Number of Bathrooms")
+            @Html.TextBoxFor(m => m.Bath, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Bath)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Type, "Type")
+            @Html.TextBoxFor(m => m.Type, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Type)
         </div>
 
         <div class="form-group">

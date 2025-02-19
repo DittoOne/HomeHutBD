@@ -18,8 +18,9 @@ namespace HomeHutBD.Services
             {
                 _logger = logger;
                 // Update these paths according to your environment
-                _pythonPath = @"python";  // or full path to python.exe
-                _flaskScriptPath = @"flask_api\app.py"; // Use your actual project path
+                _pythonPath = @"C:\Users\User\AppData\Local\Programs\Python\Python312\python.exe";  // or full path to python.exe
+                _flaskScriptPath = @"J:\HomeHutBD\HomeHutBD\flask_api\app.py";
+            // Use your actual project path
         }
 
         public  Task StartAsync(CancellationToken cancellationToken)
@@ -35,10 +36,12 @@ namespace HomeHutBD.Services
                         UseShellExecute = false,
                         RedirectStandardOutput = true,
                         RedirectStandardError = true,
-                        CreateNoWindow = true
+                        CreateNoWindow = true,
+                        WorkingDirectory = @"J:\HomeHutBD\HomeHutBD\flask_api"  // Set the correct working directory
                     };
 
-                    _flaskProcess = new Process { StartInfo = startInfo };
+
+                _flaskProcess = new Process { StartInfo = startInfo };
 
                     _flaskProcess.OutputDataReceived += (sender, e) =>
                     {
