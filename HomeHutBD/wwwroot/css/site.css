@@ -20,3 +20,200 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+
+:root {
+    --primary-color: #2c6e49;
+    --secondary-color: #4c956c;
+    --accent-color: #fefee3;
+    --dark-color: #1a3c40;
+    --light-color: #f8f9fa;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #333;
+    background-color: #f8f9fa;
+}
+
+.navbar {
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 0.8rem 1rem;
+}
+
+.navbar-brand {
+    font-weight: 700;
+    font-size: 1.5rem;
+    color: var(--primary-color);
+}
+
+    .navbar-brand span {
+        color: var(--secondary-color);
+    }
+
+.navbar .nav-link {
+    color: #333;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    transition: all 0.3s ease;
+}
+
+    .navbar .nav-link:hover {
+        color: var(--primary-color);
+    }
+
+.navbar .nav-item.active .nav-link {
+    color: var(--primary-color);
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+    .btn-primary:hover {
+        background-color: var(--secondary-color);
+        border-color: var(--secondary-color);
+    }
+
+.btn-outline-primary {
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+    .btn-outline-primary:hover {
+        background-color: var(--primary-color);
+        color: white;
+    }
+
+.hero {
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/api/placeholder/1200/600');
+    background-size: cover;
+    background-position: center;
+    color: white;
+    padding: 7rem 0;
+    margin-bottom: 3rem;
+}
+
+    .hero h1 {
+        font-weight: 700;
+        font-size: 3rem;
+        margin-bottom: 1rem;
+    }
+
+.search-box {
+    background: white;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    margin-top: 2rem;
+}
+
+.feature-box {
+    padding: 1.5rem;
+    border-radius: 10px;
+    background: white;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    margin-bottom: 2rem;
+    transition: transform 0.3s ease;
+}
+
+    .feature-box:hover {
+        transform: translateY(-5px);
+    }
+
+.feature-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: var(--primary-color);
+}
+
+.property-card {
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    margin-bottom: 2rem;
+    transition: transform 0.3s ease;
+    background: white;
+}
+
+    .property-card:hover {
+        transform: translateY(-5px);
+    }
+
+.property-img {
+    height: 200px;
+    background-size: cover;
+    background-position: center;
+}
+
+.property-info {
+    padding: 1.5rem;
+}
+
+.property-price {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+.property-address {
+    color: #777;
+    margin-bottom: 0.5rem;
+}
+
+.property-stats {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid #eee;
+}
+
+.property-stat {
+    display: flex;
+    align-items: center;
+    color: #555;
+}
+
+    .property-stat i {
+        margin-right: 0.5rem;
+    }
+
+footer {
+    background-color: var(--dark-color);
+    color: white;
+    padding: 3rem 0;
+    margin-top: 3rem;
+}
+
+.footer-links h5 {
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+}
+
+.footer-links ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+    .footer-links ul li {
+        margin-bottom: 0.5rem;
+    }
+
+        .footer-links ul li a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+            .footer-links ul li a:hover {
+                color: white;
+            }
+
+.footer-bottom {
+    background-color: rgba(0, 0, 0, 0.2);
+    padding: 1rem 0;
+    margin-top: 2rem;
+}

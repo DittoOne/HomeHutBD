@@ -2,7 +2,160 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<section class="hero text-center">
+    <div class="container">
+        <h1>Find Your Dream Home in Bangladesh</h1>
+        <p class="lead">The most trusted platform for buying, selling, and renting properties</p>
+        <div class="row justify-content-center">
+            <div class="col-md-10 col-lg-8">
+                <div class="search-box">
+                    <form>
+                        <div class="row g-3">
+                            <div class="col-md-4">
+                                <select class="form-select">
+                                    <option selected>Location</option>
+                                    <option>Dhaka</option>
+                                    <option>Chittagong</option>
+                                    <option>Sylhet</option>
+                                    <option>Rajshahi</option>
+                                    <option>Khulna</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3">
+                                <select class="form-select">
+                                    <option selected>Property Type</option>
+                                    <option>Apartment</option>
+                                    <option>House</option>
+                                    <option>Commercial</option>
+                                    <option>Land</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3">
+                                <select class="form-select">
+                                    <option selected>Budget</option>
+                                    <option>Under ৳20 Lac</option>
+                                    <option>৳20 Lac - ৳50 Lac</option>
+                                    <option>৳50 Lac - ৳1 Crore</option>
+                                    <option>Above ৳1 Crore</option>
+                                </select>
+                            </div>
+                            <div class="col-md-2">
+                                <button type="submit" class="btn btn-primary w-100">Search</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="features py-5">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2>Why Choose HomeHutBD?</h2>
+            <p class="lead text-muted">We make property transactions simple, fair, and transparent</p>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="feature-box text-center">
+                    <div class="feature-icon">
+                        <i class="fas fa-calculator"></i>
+                    </div>
+                    <h3>Accurate Price Prediction</h3>
+                    <p>Get fair market value estimates for any property based on location, size, and features.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="feature-box text-center">
+                    <div class="feature-icon">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <h3>Direct Communication</h3>
+                    <p>Connect directly with buyers or sellers through our secure chat and call system.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="feature-box text-center">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Verified Listings</h3>
+                    <p>All property listings undergo verification to ensure authenticity and trustworthiness.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="featured-properties py-5">
+    <div class="container">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2>Featured Properties</h2>
+            <a href="#" class="btn btn-outline-primary">View All</a>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="property-card">
+                    <div class="property-img" style="background-image: url('/api/placeholder/400/320')"></div>
+                    <div class="property-info">
+                        <div class="property-price">৳85 Lac</div>
+                        <h5 class="property-title">Modern Apartment with City View</h5>
+                        <p class="property-address"><i class="fas fa-map-marker-alt"></i> Banani, Dhaka</p>
+                        <div class="property-stats">
+                            <div class="property-stat"><i class="fas fa-bed"></i> 3 Beds</div>
+                            <div class="property-stat"><i class="fas fa-bath"></i> 2 Baths</div>
+                            <div class="property-stat"><i class="fas fa-vector-square"></i> 1,250 sqft</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="property-card">
+                    <div class="property-img" style="background-image: url('/api/placeholder/400/320')"></div>
+                    <div class="property-info">
+                        <div class="property-price">৳1.2 Crore</div>
+                        <h5 class="property-title">Luxury Villa with Garden</h5>
+                        <p class="property-address"><i class="fas fa-map-marker-alt"></i> Gulshan, Dhaka</p>
+                        <div class="property-stats">
+                            <div class="property-stat"><i class="fas fa-bed"></i> 4 Beds</div>
+                            <div class="property-stat"><i class="fas fa-bath"></i> 3 Baths</div>
+                            <div class="property-stat"><i class="fas fa-vector-square"></i> 2,400 sqft</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="property-card">
+                    <div class="property-img" style="background-image: url('/api/placeholder/400/320')"></div>
+                    <div class="property-info">
+                        <div class="property-price">৳45 Lac</div>
+                        <h5 class="property-title">Affordable Family Home</h5>
+                        <p class="property-address"><i class="fas fa-map-marker-alt"></i> Mirpur, Dhaka</p>
+                        <div class="property-stats">
+                            <div class="property-stat"><i class="fas fa-bed"></i> 2 Beds</div>
+                            <div class="property-stat"><i class="fas fa-bath"></i> 1 Bath</div>
+                            <div class="property-stat"><i class="fas fa-vector-square"></i> 950 sqft</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="cta py-5 bg-light">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-8">
+                <h2>Ready to Find Your Perfect Home?</h2>
+                <p class="lead mb-0">Join thousands of satisfied users on Bangladesh's most trusted property platform.</p>
+            </div>
+            <div class="col-md-4 text-md-end">
+                <a href="#" class="btn btn-primary btn-lg">Get Started</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>

@@ -5,16 +5,18 @@
     @if (signInManager.IsSignedIn(User))
     {
         <li class="nav-item">
-            <a class="nav-link text-dark" asp-controller="Account" asp-action="Logout">Logout</a>
+            <a class="btn btn-outline-primary me-2" asp-controller="Account" asp-action="Logout"><i class="fas fa-sign-out-alt"></i>Logout</a>
         </li>
     }
     else
     {
+        
+        
         <li class="nav-item">
-            <a class="nav-link text-dark" asp-controller="Account" asp-action="Login">Login</a>
+            <a asp-controller="Account" asp-action="Login" class="btn btn-outline-primary me-2"><i class="fas fa-sign-in-alt"></i> Login</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link text-dark" asp-controller="Account" asp-action="Register">Register</a>
+            <a asp-controller="Account" asp-action="Register" class="btn btn-primary"><i class="fas fa-user-plus"></i> Register</a>
         </li>
     }
 
