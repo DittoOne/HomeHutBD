@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "J:\\HomeHutBD\\HomeHutBD\\HomeHutBD.csproj": {}
+    "F:\\HomeHutBD\\HomeHutBD\\HomeHutBD.csproj": {}
   },
   "projects": {
-    "J:\\HomeHutBD\\HomeHutBD\\HomeHutBD.csproj": {
+    "F:\\HomeHutBD\\HomeHutBD\\HomeHutBD.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "J:\\HomeHutBD\\HomeHutBD\\HomeHutBD.csproj",
+        "projectUniqueName": "F:\\HomeHutBD\\HomeHutBD\\HomeHutBD.csproj",
         "projectName": "HomeHutBD",
-        "projectPath": "J:\\HomeHutBD\\HomeHutBD\\HomeHutBD.csproj",
+        "projectPath": "F:\\HomeHutBD\\HomeHutBD\\HomeHutBD.csproj",
         "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-        "outputPath": "J:\\HomeHutBD\\HomeHutBD\\obj\\",
+        "outputPath": "F:\\HomeHutBD\\HomeHutBD\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "E:\\Microsoft Visual Studio\\Shared\\NuGetPackages"

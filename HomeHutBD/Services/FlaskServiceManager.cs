@@ -20,28 +20,26 @@ namespace HomeHutBD.Services
             {
                     _logger = logger;
 
-                // Get the current directory (which is HomeHutBD/HomeHutBD)
                 string baseDirectory = Directory.GetCurrentDirectory();
                 _logger.LogInformation($"Base Directory: {baseDirectory}");
 
-                // Construct paths directly under the HomeHutBD/HomeHutBD directory
                 _workingDirectory = Path.Combine(baseDirectory, "flask_api");
                 _flaskScriptPath = Path.Combine(_workingDirectory, "app.py");
                 _pythonPath = Path.Combine(_workingDirectory, "venv", "Scripts", "python.exe");
 
-                // Log the constructed paths
+                
                 _logger.LogInformation($"Python Path: {_pythonPath}");
                 _logger.LogInformation($"Flask Script Path: {_flaskScriptPath}");
                 _logger.LogInformation($"Working Directory: {_workingDirectory}");
 
-                // Create flask_api directory if it doesn't exist
+               
                 if (!Directory.Exists(_workingDirectory))
                 {
                     _logger.LogInformation($"Creating flask_api directory at: {_workingDirectory}");
                     Directory.CreateDirectory(_workingDirectory);
                 }
 
-                // Verify paths exist
+               
                 if (!File.Exists(_pythonPath))
                 {
                     _logger.LogWarning($"Python executable not found at: {_pythonPath}");
@@ -61,24 +59,7 @@ namespace HomeHutBD.Services
                     {
                         _logger.LogInformation("Starting Flask API service...");
 
-                        // Verify required files exist before starting
-                        if (!File.Exists(_pythonPath))
-                        {
-                            throw new FileNotFoundException(
-                                "Python executable not found. Please create a virtual environment by running:\n" +
-                                "1. cd J:\\HomeHutBD\\HomeHutBD\\flask_api\n" +
-                                "2. python -m venv venv\n" +
-                                "3. venv\\Scripts\\activate\n" +
-                                "4. pip install flask flask-cors pandas numpy scikit-learn joblib"
-                            );
-                        }
-
-                        if (!File.Exists(_flaskScriptPath))
-                        {
-                            throw new FileNotFoundException(
-                                "Flask script (app.py) not found. Please ensure it's in the flask_api directory"
-                            );
-                        }
+                        
 
                         ProcessStartInfo startInfo = new ProcessStartInfo
                                 {
