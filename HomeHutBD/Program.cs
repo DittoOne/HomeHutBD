@@ -1,7 +1,5 @@
 using HomeHutBD.Data;
 using HomeHutBD.Services;
-using HomeHutBD.Models; // Ensure you have this if Users model is in Models namespace
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,16 +11,13 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnectionString")));
 
-// Add Identity Services (This is missing in your code)
-builder.Services.AddIdentity<Users, IdentityRole>()
-    .AddEntityFrameworkStores<ApplicationDbContext>()
-    .AddDefaultTokenProviders();
-
-// Authentication & Authorization Middleware
-builder.Services.ConfigureApplicationCookie(options =>
+// Add session support
+builder.Services.AddDistributedMemoryCache();
+builder.Services.AddSession(options =>
 {
-    options.LoginPath = "/Account/Login"; // Update with your actual login path
-    options.AccessDeniedPath = "/Account/AccessDenied";
+    options.IdleTimeout = TimeSpan.FromMinutes(30);
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
 });
 
 // Add a hosted service (e.g., for a Flask API)
@@ -48,9 +43,8 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
 
-// Ensure Authentication & Authorization Middleware is Added
-app.UseAuthentication();
-app.UseAuthorization();
+// Enable session
+app.UseSession();
 
 app.MapControllerRoute(
     name: "default",

@@ -35,12 +35,33 @@ namespace HomeHutBD.Controllers
 
                 if (user != null)
                 {
-                    // TODO: Sign the user in (e.g., using cookies or Identity).
+                    // Manual authentication using sessions
+                    HttpContext.Session.SetInt32("UserId", user.UserId);
+                    HttpContext.Session.SetString("Username", user.Username);
+
                     return RedirectToAction("Index", "Home");
                 }
                 ModelState.AddModelError("", "Invalid login credentials.");
             }
             return View(model);
+        }
+
+        // POST: /Account/Logout
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Logout()
+        {
+            // Clear the session
+            HttpContext.Session.Clear();
+            return RedirectToAction("Index", "Home");
+        }
+
+        // GET: /Account/Logout (alternative for links)
+        public IActionResult LogoutGet()
+        {
+            // Clear the session
+            HttpContext.Session.Clear();
+            return RedirectToAction("Index", "Home");
         }
 
         // GET: /Account/Register
@@ -74,6 +95,7 @@ namespace HomeHutBD.Controllers
                 }
 
                 // Create new user (plain text password for demo only!)
+                // In production, you should hash the password
                 var user = new Users
                 {
                     Username = model.Username,
@@ -89,7 +111,6 @@ namespace HomeHutBD.Controllers
                 _context.Users.Add(user);
                 _context.SaveChanges();
 
-                // Possibly sign in user automatically here.
                 return RedirectToAction("Login");
             }
             return View(model);
@@ -115,7 +136,6 @@ namespace HomeHutBD.Controllers
                     ModelState.AddModelError("", "No user found with that email.");
                     return View(model);
                 }
-                // TODO: Email user a reset token or direct them to the ChangePassword page
                 // For simplicity, let's just go to ChangePassword
                 return RedirectToAction("ChangePassword", new { email = model.Email });
             }
@@ -146,8 +166,8 @@ namespace HomeHutBD.Controllers
                     return View(model);
                 }
 
-                // Update the password
-                user.Password = model.NewPassword; // In production, hash it!
+                // Update the password (in production, hash it!)
+                user.Password = model.NewPassword;
                 _context.SaveChanges();
 
                 return RedirectToAction("Login");
