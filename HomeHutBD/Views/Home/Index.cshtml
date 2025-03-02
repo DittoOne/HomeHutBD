@@ -9,34 +9,33 @@
         <div class="row justify-content-center">
             <div class="col-md-10 col-lg-8">
                 <div class="search-box">
-                    <form>
+                    <form asp-controller="Home" asp-action="Search" method="post">
                         <div class="row g-3">
                             <div class="col-md-4">
-                                <select class="form-select">
-                                    <option selected>Location</option>
-                                    <option>Dhaka</option>
-                                    <option>Chittagong</option>
-                                    <option>Sylhet</option>
-                                    <option>Rajshahi</option>
-                                    <option>Khulna</option>
+                                <select class="form-select" name="location">
+                                    <option value="">Location</option>
+                                    <option value="Dhaka">Dhaka</option>
+                                    <option value="Chittagong">Chittagong</option>
+                                    <option value="Sylhet">Sylhet</option>
+                                    <option value="Rajshahi">Rajshahi</option>
+                                    <option value="Khulna">Khulna</option>
                                 </select>
                             </div>
                             <div class="col-md-3">
-                                <select class="form-select">
-                                    <option selected>Property Type</option>
-                                    <option>Apartment</option>
-                                    <option>House</option>
-                                    <option>Commercial</option>
-                                    <option>Land</option>
+                                <select class="form-select" name="type">
+                                    <option value="">Property Type</option>
+                                    <option value="Apartment">Apartment</option>
+                                    <option value="Duplex">Duplex</option>
+                                    <option value="Building">Building</option>
                                 </select>
                             </div>
                             <div class="col-md-3">
-                                <select class="form-select">
-                                    <option selected>Budget</option>
-                                    <option>Under ৳20 Lac</option>
-                                    <option>৳20 Lac - ৳50 Lac</option>
-                                    <option>৳50 Lac - ৳1 Crore</option>
-                                    <option>Above ৳1 Crore</option>
+                                <select class="form-select" name="budget">
+                                    <option value="">Budget</option>
+                                    <option value="Under ৳20 Lac">Under ৳20 Lac</option>
+                                    <option value="৳20 Lac - ৳50 Lac">৳20 Lac - ৳50 Lac</option>
+                                    <option value="৳50 Lac - ৳1 Crore">৳50 Lac - ৳1 Crore</option>
+                                    <option value="Above ৳1 Crore">Above ৳1 Crore</option>
                                 </select>
                             </div>
                             <div class="col-md-2">

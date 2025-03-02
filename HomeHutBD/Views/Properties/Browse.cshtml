@@ -1,0 +1,112 @@
+﻿@model IEnumerable<HomeHutBD.Models.Properties>
+@{
+    ViewData["Title"] = "Browse Properties";
+}
+
+<section class="search-section py-4 bg-light">
+    <div class="container">
+        <div class="row justify-content-between align-items-center mb-3">
+            <div class="col-md-6">
+                <h2 class="mb-0">Browse Properties</h2>
+            </div>
+            @if (Context.Session.GetInt32("UserId").HasValue)
+            {
+                <div class="col-md-6 text-md-end">
+                    <a href="@Url.Action("Create", "Properties")" class="btn btn-primary">
+                        <i class="fas fa-plus-circle me-2"></i>List Your Property
+                    </a>
+                </div>
+            }
+        </div>
+
+        <div class="card">
+    <div class="card-body">
+        <form method="get" action="@Url.Action("Browse", "Properties")">
+            <div class="row g-3">
+                <div class="col-md-3">
+                    <select name="location" class="form-select">
+                        <option value="">Any Location</option>
+                        <option value="Dhaka">Dhaka</option>
+                        <option value="Chittagong">Chittagong</option>
+                        <option value="Sylhet">Sylhet</option>
+                        <option value="Rajshahi">Rajshahi</option>
+                        <option value="Khulna">Khulna</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <select name="type" class="form-select">
+                        <option value="">Any Type</option>
+                        <option value="Apartment">Apartment</option>
+                        <option value="Duplex">Duplex</option>
+                        <option value="Building">Building</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <select name="maxPrice" class="form-select">
+                        <option value="">Any Budget</option>
+                        <option value="1000000">Under ৳10 Lac</option>
+                        <option value="2000000">Under ৳20 Lac</option>
+                        <option value="5000000">Under ৳50 Lac</option>
+                        <option value="10000000">Under ৳1 Crore</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <button type="submit" class="btn btn-primary w-100">
+                        <i class="fas fa-search me-2"></i>Search
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+    </div>
+</section>
+
+<section class="property-listings py-5">
+    <div class="container">
+        @if (!Model.Any())
+        {
+            <div class="text-center py-5">
+                <i class="fas fa-search fa-3x text-muted mb-3"></i>
+                <h4>No properties found</h4>
+                <p class="text-muted">Try adjusting your search criteria or check back later.</p>
+            </div>
+        }
+        else
+        {
+            <div class="row">
+                @foreach (var property in Model)
+                {
+                    <div class="col-md-4 mb-4">
+                        <div class="property-card">
+                            <div class="property-purpose badge @(property.Purpose == "Rent" ? "bg-info" : "bg-success")">
+                                @(property.Purpose == "Rent" ? "For Rent" : "For Sale")
+                            </div>
+                            <div class="property-img" style="background-image: url('@(string.IsNullOrEmpty(property.ImageUrl) ? "/api/placeholder/400/320" : property.ImageUrl)')"></div>
+                            <div class="property-info">
+                                <div class="property-price">৳@property.Price.ToString("N0")</div>
+                                <h5 class="property-title">
+                                    <a href="@Url.Action("Details", "Properties", new { id = property.PropertyId })">@property.Title</a>
+                                </h5>
+                                <p class="property-address"><i class="fas fa-map-marker-alt"></i> @property.Address</p>
+                                <div class="property-stats">
+                                    <div class="property-stat"><i class="fas fa-bed"></i> @property.Bedrooms Beds</div>
+                                    <div class="property-stat"><i class="fas fa-bath"></i> @property.Bathrooms Baths</div>
+                                    <div class="property-stat"><i class="fas fa-vector-square"></i> @property.AreaSqft sqft</div>
+                                </div>
+                                <div class="property-footer mt-3 d-flex justify-content-between align-items-center">
+                                    <div class="property-owner">
+                                        <small class="text-muted">Posted by @property.User.Username</small>
+                                    </div>
+                                    <div class="property-date">
+                                        <small class="text-muted">@property.LastUpdate.ToString("MMM dd, yyyy")</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+    </div>
+</section>

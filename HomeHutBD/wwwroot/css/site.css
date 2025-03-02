@@ -217,3 +217,124 @@ footer {
     padding: 1rem 0;
     margin-top: 2rem;
 }
+
+
+
+/* Property listing styles */
+.property-card {
+    position: relative;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    margin-bottom: 2rem;
+    transition: transform 0.3s ease;
+    background: white;
+}
+
+    .property-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    }
+
+.property-purpose {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    z-index: 10;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+.property-img {
+    height: 200px;
+    background-size: cover;
+    background-position: center;
+}
+
+.property-info {
+    padding: 1.5rem;
+}
+
+.property-price {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+}
+
+.property-title {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+}
+
+    .property-title a {
+        color: #333;
+        text-decoration: none;
+    }
+
+        .property-title a:hover {
+            color: var(--primary-color);
+        }
+
+.property-address {
+    color: #777;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.property-stats {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid #eee;
+}
+
+.property-stat {
+    display: flex;
+    align-items: center;
+    color: #555;
+    font-size: 0.9rem;
+}
+
+    .property-stat i {
+        margin-right: 0.5rem;
+    }
+
+.property-footer {
+    border-top: 1px solid #eee;
+    padding-top: 0.75rem;
+}
+
+/* Account dropdown styles */
+.dropdown-menu {
+    border: none;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    padding: 0.5rem 0;
+}
+
+.dropdown-item {
+    padding: 0.5rem 1.5rem;
+}
+
+    .dropdown-item:hover {
+        background-color: rgba(44, 110, 73, 0.1);
+    }
+
+    .dropdown-item i {
+        width: 20px;
+    }
+
+/* Search section styles */
+.search-section {
+    background-color: #f8f9fa;
+    padding: 2rem 0;
+    margin-bottom: 2rem;
+}
+
+    .search-section .card {
+        border: none;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        border-radius: 10px;
+    }

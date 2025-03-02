@@ -13,17 +13,46 @@ namespace HomeHutBD.Controllers
         {
             _logger = logger;
         }
-        //[Authorize]
+
         public IActionResult Index()
         {
             return View();
         }
-        
+
         public IActionResult Privacy()
         {
             return View();
         }
 
+        [HttpPost]
+        public IActionResult Search(string location, string type, string budget)
+        {
+            // Parse budget string to get the maximum price
+            decimal? maxPrice = null;
+            switch (budget)
+            {
+                case "Under ?20 Lac":
+                    maxPrice = 2000000;
+                    break;
+                case "?20 Lac - ?50 Lac":
+                    maxPrice = 5000000;
+                    break;
+                case "?50 Lac - ?1 Crore":
+                    maxPrice = 10000000;
+                    break;
+                case "Above ?1 Crore":
+                    maxPrice = null; // No maximum price
+                    break;
+            }
+
+            // Redirect to Properties/Browse with search parameters
+            return RedirectToAction("Browse", "Properties", new
+            {
+                location = location,
+                type = type,
+                maxPrice = maxPrice
+            });
+        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

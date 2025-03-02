@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "GEHkcpEaX9CNJDK7aoCJgerAADO6+37GlgDHjMsLHts=",
+  "Hash": "pnbbfpoDJoYJhDF2RY8P6C5b3M7E+p6vHjteHqa2bZA=",
   "Source": "HomeHutBD",
   "BasePath": "_content/HomeHutBD",
   "Mode": "Default",
@@ -94,8 +94,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "ksz3wnxgze",
-      "Integrity": "9MMbQO5st/luyYpYus/u67cM515CWJNC4nVQupunStA=",
+      "Fingerprint": "5wksm7e9dv",
+      "Integrity": "xcr+tfXnzbIKhvhKrInkETTOlQvDVl7elJu7IrgtFbQ=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\site.css"
@@ -1445,6 +1445,51 @@
       ]
     },
     {
+      "Route": "css/site.5wksm7e9dv.css",
+      "AssetFile": "D:\\Rakib\\MyProject\\HomeHutBD\\HomeHutBD\\wwwroot\\css\\site.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "6456"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"xcr+tfXnzbIKhvhKrInkETTOlQvDVl7elJu7IrgtFbQ=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 02 Mar 2025 16:26:20 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "5wksm7e9dv"
+        },
+        {
+          "Name": "label",
+          "Value": "css/site.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-xcr+tfXnzbIKhvhKrInkETTOlQvDVl7elJu7IrgtFbQ="
+        }
+      ]
+    },
+    {
       "Route": "css/site.css",
       "AssetFile": "D:\\Rakib\\MyProject\\HomeHutBD\\HomeHutBD\\wwwroot\\css\\site.css",
       "Selectors": [],
@@ -1455,7 +1500,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "4212"
+          "Value": "6456"
         },
         {
           "Name": "Content-Type",
@@ -1463,11 +1508,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"9MMbQO5st/luyYpYus/u67cM515CWJNC4nVQupunStA=\""
+          "Value": "\"xcr+tfXnzbIKhvhKrInkETTOlQvDVl7elJu7IrgtFbQ=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 02 Mar 2025 14:20:42 GMT"
+          "Value": "Sun, 02 Mar 2025 16:26:20 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1477,52 +1522,7 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-9MMbQO5st/luyYpYus/u67cM515CWJNC4nVQupunStA="
-        }
-      ]
-    },
-    {
-      "Route": "css/site.ksz3wnxgze.css",
-      "AssetFile": "D:\\Rakib\\MyProject\\HomeHutBD\\HomeHutBD\\wwwroot\\css\\site.css",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "4212"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/css"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"9MMbQO5st/luyYpYus/u67cM515CWJNC4nVQupunStA=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Sun, 02 Mar 2025 14:20:42 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "ksz3wnxgze"
-        },
-        {
-          "Name": "label",
-          "Value": "css/site.css"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-9MMbQO5st/luyYpYus/u67cM515CWJNC4nVQupunStA="
+          "Value": "sha256-xcr+tfXnzbIKhvhKrInkETTOlQvDVl7elJu7IrgtFbQ="
         }
       ]
     },
