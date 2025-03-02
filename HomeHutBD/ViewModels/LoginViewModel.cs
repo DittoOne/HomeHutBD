@@ -12,7 +12,7 @@ namespace HomeHutBD.ViewModels
         [DataType(DataType.Password)]
         public string Password { get; set; }
 
-        [Display(Name = "Remember me?")]
-        public bool RememberMe { get; set; }
+        // Optionally add RememberMe
+        public bool RememberMe { get; set; } = false;
     }
 }

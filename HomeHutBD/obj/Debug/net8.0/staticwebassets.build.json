@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "ILthTw5YetBWc/oP4ntghLrpFvTfR7dzzeMN9mmrWFM=",
+  "Hash": "zSz05FYeQCW5C0If9UgQ1GcCGAAVWGWrxqh7mdmnpyA=",
   "Source": "HomeHutBD",
   "BasePath": "_content/HomeHutBD",
   "Mode": "Default",
@@ -73,8 +73,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "ksuo1j5lbk",
-      "Integrity": "HPHIbJLSsMi7AJSBZpVy0UrfkexL8T3yNlcEKBboKwI=",
+      "Fingerprint": "b8pkfbiosb",
+      "Integrity": "RajekgbY3NmULpVz1mAncXvJYFLtt9bsbAQkHjmkMKI=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\account.css"
@@ -1363,6 +1363,51 @@
   ],
   "Endpoints": [
     {
+      "Route": "css/account.b8pkfbiosb.css",
+      "AssetFile": "D:\\Rakib\\MyProject\\HomeHutBD\\HomeHutBD\\wwwroot\\css\\account.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "396"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"RajekgbY3NmULpVz1mAncXvJYFLtt9bsbAQkHjmkMKI=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 01 Mar 2025 17:49:10 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "b8pkfbiosb"
+        },
+        {
+          "Name": "label",
+          "Value": "css/account.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-RajekgbY3NmULpVz1mAncXvJYFLtt9bsbAQkHjmkMKI="
+        }
+      ]
+    },
+    {
       "Route": "css/account.css",
       "AssetFile": "D:\\Rakib\\MyProject\\HomeHutBD\\HomeHutBD\\wwwroot\\css\\account.css",
       "Selectors": [],
@@ -1373,7 +1418,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "505"
+          "Value": "396"
         },
         {
           "Name": "Content-Type",
@@ -1381,11 +1426,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"HPHIbJLSsMi7AJSBZpVy0UrfkexL8T3yNlcEKBboKwI=\""
+          "Value": "\"RajekgbY3NmULpVz1mAncXvJYFLtt9bsbAQkHjmkMKI=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 28 Feb 2025 06:17:12 GMT"
+          "Value": "Sat, 01 Mar 2025 17:49:10 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1395,52 +1440,7 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-HPHIbJLSsMi7AJSBZpVy0UrfkexL8T3yNlcEKBboKwI="
-        }
-      ]
-    },
-    {
-      "Route": "css/account.ksuo1j5lbk.css",
-      "AssetFile": "D:\\Rakib\\MyProject\\HomeHutBD\\HomeHutBD\\wwwroot\\css\\account.css",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "505"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/css"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"HPHIbJLSsMi7AJSBZpVy0UrfkexL8T3yNlcEKBboKwI=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Fri, 28 Feb 2025 06:17:12 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "ksuo1j5lbk"
-        },
-        {
-          "Name": "label",
-          "Value": "css/account.css"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-HPHIbJLSsMi7AJSBZpVy0UrfkexL8T3yNlcEKBboKwI="
+          "Value": "sha256-RajekgbY3NmULpVz1mAncXvJYFLtt9bsbAQkHjmkMKI="
         }
       ]
     },
@@ -1467,7 +1467,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 28 Feb 2025 06:28:59 GMT"
+          "Value": "Sat, 01 Mar 2025 13:43:44 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1504,7 +1504,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 28 Feb 2025 06:28:59 GMT"
+          "Value": "Sat, 01 Mar 2025 13:43:44 GMT"
         },
         {
           "Name": "Cache-Control",

@@ -1,9 +1,35 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace HomeHutBD.Models
 {
-    public class Users : IdentityUser
+    [Table("Users")]
+    public class Users
     {
-        public string Fullname { get; set; }
+        [Key]
+        public int UserId { get; set; }
+
+        [Required, StringLength(50)]
+        public string Username { get; set; }
+
+        [Required, StringLength(50)]
+        public string FirstName { get; set; }
+
+        [Required, StringLength(50)]
+        public string LastName { get; set; }
+
+        [Required, StringLength(20)]
+        public string PhoneNumber { get; set; }
+
+        [Required, EmailAddress, StringLength(100)]
+        public string Email { get; set; }
+
+        [Required, StringLength(255)]
+        public string Password { get; set; }
+
+        public string ProfileImage { get; set; }
+
+        public DateTime CreatedAt { get; set; } = DateTime.Now;
     }
 }

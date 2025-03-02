@@ -1,46 +1,42 @@
-using HomeHutBD.data;
-//using HomeHutBD.Data;
-using HomeHutBD.Models;
+using HomeHutBD.Data;
 using HomeHutBD.Services;
+using HomeHutBD.Models; // Ensure you have this if Users model is in Models namespace
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("Default")));
 
-builder.Services.AddIdentity<Users, IdentityRole>(options =>
+// Register ApplicationDbContext
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnectionString")));
+
+// Add Identity Services (This is missing in your code)
+builder.Services.AddIdentity<Users, IdentityRole>()
+    .AddEntityFrameworkStores<ApplicationDbContext>()
+    .AddDefaultTokenProviders();
+
+// Authentication & Authorization Middleware
+builder.Services.ConfigureApplicationCookie(options =>
 {
-    options.Password.RequireNonAlphanumeric = false;
-    options.Password.RequiredLength = 8;
-    options.Password.RequireUppercase = false;
-    options.Password.RequireLowercase = false;
-    options.User.RequireUniqueEmail = true;
-    options.SignIn.RequireConfirmedAccount = false;
-    options.SignIn.RequireConfirmedEmail = false;
-    options.SignIn.RequireConfirmedPhoneNumber = false;
-})
-.AddEntityFrameworkStores<AppDbContext>()
-.AddDefaultTokenProviders();
+    options.LoginPath = "/Account/Login"; // Update with your actual login path
+    options.AccessDeniedPath = "/Account/AccessDenied";
+});
 
-
+// Add a hosted service (e.g., for a Flask API)
 builder.Services.AddHostedService<FlaskServiceManager>();
-
 builder.Services.AddHttpClient();
 
 var app = builder.Build();
 
 using (var scope = app.Services.CreateScope())
 {
+    // Optionally wait for your hosted service to start (if needed)
     var flaskService = scope.ServiceProvider.GetRequiredService<IHostedService>() as FlaskServiceManager;
-    await Task.Delay(5000);  
+    await Task.Delay(5000);
 }
-
 
 if (!app.Environment.IsDevelopment())
 {
@@ -51,6 +47,9 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
+
+// Ensure Authentication & Authorization Middleware is Added
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(
