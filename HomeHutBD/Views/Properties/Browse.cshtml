@@ -105,12 +105,11 @@
                                                 <i class="fas fa-comments"></i> Chat
                                             </button>
 
-                                            <!-- Chat Modal -->
-                                            <div class="modal fade" id="chatModal-@property.PropertyId" tabindex="-1" aria-hidden="true">
-                                                <div class="modal-dialog">
+                                            <div class="modal fade" id="chatModal-@property.PropertyId" tabindex="-1" aria-labelledby="chatModalLabel-@property.PropertyId" aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-centered">
                                                     <div class="modal-content">
                                                         <div class="modal-header bg-primary text-white">
-                                                            <h5 class="modal-title">Contact About: @property.Title</h5>
+                                                            <h5 class="modal-title" id="chatModalLabel-@property.PropertyId">Contact About: @property.Title</h5>
                                                             <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
                                                         <form method="post" action="@Url.Action("StartChat", "Chat")">
@@ -145,3 +144,21 @@
         }
     </div>
 </section>
+
+@section Scripts {
+    <script>
+        // Ensure modals work correctly
+        $(document).ready(function() {
+            // Prevent modal from closing when clicking inside textarea
+            $('.modal-body textarea').on('click', function(e) {
+                e.stopPropagation();
+            });
+
+            // Initialize tooltips if you're using them
+            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+            var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+                return new bootstrap.Tooltip(tooltipTriggerEl)
+            });
+        });
+    </script>
+}

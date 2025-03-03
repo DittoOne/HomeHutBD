@@ -2,21 +2,32 @@ using System.Diagnostics;
 using HomeHutBD.Models;
 using Microsoft.AspNetCore.Mvc;
 using HomeHutBD.Helpers;
+using HomeHutBD.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace HomeHutBD.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly ApplicationDbContext _context; // Add this line
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, ApplicationDbContext context) // Modify constructor
         {
             _logger = logger;
+            _context = context;
         }
 
         public IActionResult Index()
         {
-            return View();
+            // Get 3 random properties from the database
+            var featuredProperties = _context.Properties
+                .Include(p => p.User)
+                .OrderBy(p => Guid.NewGuid()) // Random order
+                .Take(3)
+                .ToList();
+
+            return View(featuredProperties);
         }
 
         public IActionResult Privacy()

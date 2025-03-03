@@ -1,4 +1,5 @@
-﻿@{
+﻿@model IEnumerable<HomeHutBD.Models.Properties>
+@{
     ViewData["Title"] = "Home Page";
 }
 
@@ -91,54 +92,80 @@
     <div class="container">
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h2>Featured Properties</h2>
-            <a href="#" class="btn btn-outline-primary">View All</a>
+            <a href="@Url.Action("Browse", "Properties")" class="btn btn-outline-primary">View All</a>
         </div>
         <div class="row">
-            <div class="col-md-4">
-                <div class="property-card">
-                    <div class="property-img" style="background-image: url('/api/placeholder/400/320')"></div>
-                    <div class="property-info">
-                        <div class="property-price">৳85 Lac</div>
-                        <h5 class="property-title">Modern Apartment with City View</h5>
-                        <p class="property-address"><i class="fas fa-map-marker-alt"></i> Banani, Dhaka</p>
-                        <div class="property-stats">
-                            <div class="property-stat"><i class="fas fa-bed"></i> 3 Beds</div>
-                            <div class="property-stat"><i class="fas fa-bath"></i> 2 Baths</div>
-                            <div class="property-stat"><i class="fas fa-vector-square"></i> 1,250 sqft</div>
+            @if (Model.Any())
+            {
+                @foreach (var property in Model)
+                {
+                    <div class="col-md-4">
+                        <div class="property-card">
+                            <div class="property-img" style="background-image: url('@(string.IsNullOrEmpty(property.ImageUrl) ? "/api/placeholder/400/320" : property.ImageUrl)')"></div>
+                            <div class="property-info">
+                                <div class="property-price">৳@property.Price.ToString("N0")</div>
+                                <h5 class="property-title">
+                                    <a href="@Url.Action("Details", "Properties", new { id = property.PropertyId })">@property.Title</a>
+                                </h5>
+                                <p class="property-address"><i class="fas fa-map-marker-alt"></i> @property.Address</p>
+                                <div class="property-stats">
+                                    <div class="property-stat"><i class="fas fa-bed"></i> @property.Bedrooms Beds</div>
+                                    <div class="property-stat"><i class="fas fa-bath"></i> @property.Bathrooms Baths</div>
+                                    <div class="property-stat"><i class="fas fa-vector-square"></i> @property.AreaSqft sqft</div>
+                                </div>
+                                <div class="property-footer mt-3 d-flex justify-content-between align-items-center">
+                                    <div class="property-owner">
+                                        <small class="text-muted">Posted by @property.User.Username</small>
+                                    </div>
+                                    <div class="property-actions">
+                                        @if (Context.Session.GetInt32("UserId").HasValue && Context.Session.GetInt32("UserId") != property.UserId)
+                                        {
+                                            <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#chatModal-@property.PropertyId">
+                                                <i class="fas fa-comments"></i> Chat
+                                            </button>
+
+                                            <div class="modal fade" id="chatModal-@property.PropertyId" tabindex="-1" aria-labelledby="chatModalLabel-@property.PropertyId" aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-centered">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header bg-primary text-white">
+                                                            <h5 class="modal-title" id="chatModalLabel-@property.PropertyId">Contact About: @property.Title</h5>
+                                                            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <form method="post" action="@Url.Action("StartChat", "Chat")">
+                                                            <input type="hidden" name="propertyId" value="@property.PropertyId" />
+                                                            <input type="hidden" name="propertyOwnerId" value="@property.UserId" />
+
+                                                            <div class="modal-body">
+                                                                <div class="mb-3">
+                                                                    <label class="form-label">Your Message</label>
+                                                                    <textarea class="form-control" name="initialMessage" rows="4" required placeholder="Hi, I'm interested in this property..."></textarea>
+                                                                </div>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                                                <button type="submit" class="btn btn-primary">Send Message</button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        }
+                                        <a href="@Url.Action("Details", "Properties", new { id = property.PropertyId })" class="btn btn-sm btn-outline-primary ms-2">
+                                            <i class="fas fa-info-circle"></i> Details
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
+                }
+            }
+            else
+            {
+                <div class="col-12 text-center">
+                    <p>No properties available at the moment.</p>
                 </div>
-            </div>
-            <div class="col-md-4">
-                <div class="property-card">
-                    <div class="property-img" style="background-image: url('/api/placeholder/400/320')"></div>
-                    <div class="property-info">
-                        <div class="property-price">৳1.2 Crore</div>
-                        <h5 class="property-title">Luxury Villa with Garden</h5>
-                        <p class="property-address"><i class="fas fa-map-marker-alt"></i> Gulshan, Dhaka</p>
-                        <div class="property-stats">
-                            <div class="property-stat"><i class="fas fa-bed"></i> 4 Beds</div>
-                            <div class="property-stat"><i class="fas fa-bath"></i> 3 Baths</div>
-                            <div class="property-stat"><i class="fas fa-vector-square"></i> 2,400 sqft</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="property-card">
-                    <div class="property-img" style="background-image: url('/api/placeholder/400/320')"></div>
-                    <div class="property-info">
-                        <div class="property-price">৳45 Lac</div>
-                        <h5 class="property-title">Affordable Family Home</h5>
-                        <p class="property-address"><i class="fas fa-map-marker-alt"></i> Mirpur, Dhaka</p>
-                        <div class="property-stats">
-                            <div class="property-stat"><i class="fas fa-bed"></i> 2 Beds</div>
-                            <div class="property-stat"><i class="fas fa-bath"></i> 1 Bath</div>
-                            <div class="property-stat"><i class="fas fa-vector-square"></i> 950 sqft</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            }
         </div>
     </div>
 </section>
