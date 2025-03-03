@@ -3,11 +3,11 @@
     ViewData["Title"] = "Property Price Prediction";
 }
 
-<div class="container mt-5">
+<div class="container prediction-container">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header bg-primary text-white">
+                <div class="card-header custom-header text-white">
                     <h2 class="mb-0">Property Price Prediction</h2>
                 </div>
                 <div class="card-body">
@@ -36,7 +36,7 @@
                         <div class="mb-3">
                             <div class="form-group">
                                 @Html.LabelFor(m => m.type, "Property Type", new { @class = "form-label" })
-                                @Html.TextBoxFor(m => m.type, new { @class = "form-control", required = "required" })
+                                @Html.DropDownListFor(m => m.type, new SelectList(new[] { "Apartment", "Building", "Duplex" }), new { @class = "form-control", required = "required" })
                                 @Html.ValidationMessageFor(m => m.type, "", new { @class = "text-danger" })
                             </div>
                         </div>
@@ -58,7 +58,7 @@
                         </div>
 
                         <div class="d-grid gap-2">
-                            <button type="submit" class="btn btn-primary">Predict Price</button>
+                            <button type="submit" class="btn btn-custom text-white">Predict Price</button>
                         </div>
                     }
 
