@@ -1,0 +1,64 @@
+﻿@model IEnumerable<HomeHutBD.Models.Properties>
+@{
+    ViewData["Title"] = "My Properties";
+}
+
+<div class="container py-5">
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <h2>My Properties</h2>
+        </div>
+        <div class="col-md-6 text-md-end">
+            <a href="@Url.Action("Create", "Properties")" class="btn btn-primary">
+                <i class="fas fa-plus-circle me-2"></i>List New Property
+            </a>
+        </div>
+    </div>
+
+    @if (!Model.Any())
+    {
+        <div class="text-center py-5">
+            <i class="fas fa-home fa-3x text-muted mb-3"></i>
+            <h4>You haven't listed any properties yet</h4>
+            <p class="text-muted">Click the button above to list your first property.</p>
+        </div>
+    }
+    else
+    {
+        <div class="row">
+            @foreach (var property in Model)
+            {
+                <div class="col-md-4 mb-4">
+                    <div class="property-card">
+                        <div class="property-purpose badge @(property.Purpose == "Rent" ? "bg-info" : "bg-success")">
+                            @(property.Purpose == "Rent" ? "For Rent" : "For Sale")
+                        </div>
+                        <div class="property-img" style="background-image: url('@(string.IsNullOrEmpty(property.ImageUrl) ? "/api/placeholder/400/320" : property.ImageUrl)')"></div>
+                        <div class="property-info">
+                            <div class="property-price">৳@property.Price.ToString("N0")</div>
+                            <h5 class="property-title">
+                                <a href="@Url.Action("Details", "Properties", new { id = property.PropertyId })">@property.Title</a>
+                            </h5>
+                            <p class="property-address"><i class="fas fa-map-marker-alt"></i> @property.Address</p>
+                            <div class="property-stats">
+                                <div class="property-stat"><i class="fas fa-bed"></i> @property.Bedrooms Beds</div>
+                                <div class="property-stat"><i class="fas fa-bath"></i> @property.Bathrooms Baths</div>
+                                <div class="property-stat"><i class="fas fa-vector-square"></i> @property.AreaSqft sqft</div>
+                            </div>
+                            <div class="property-footer mt-3 d-flex justify-content-between align-items-center">
+                                <div class="property-date">
+                                    <small class="text-muted">Posted @property.LastUpdate.ToString("MMM dd, yyyy")</small>
+                                </div>
+                                <div class="property-actions">
+                                    <a href="#" class="btn btn-sm btn-outline-primary">
+                                        <i class="fas fa-edit"></i> Edit
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+</div>

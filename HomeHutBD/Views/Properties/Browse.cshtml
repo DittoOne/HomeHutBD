@@ -98,8 +98,43 @@
                                     <div class="property-owner">
                                         <small class="text-muted">Posted by @property.User.Username</small>
                                     </div>
-                                    <div class="property-date">
-                                        <small class="text-muted">@property.LastUpdate.ToString("MMM dd, yyyy")</small>
+                                    <div class="property-actions">
+                                        @if (Context.Session.GetInt32("UserId").HasValue && Context.Session.GetInt32("UserId") != property.UserId)
+                                        {
+                                            <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#chatModal-@property.PropertyId">
+                                                <i class="fas fa-comments"></i> Chat
+                                            </button>
+
+                                            <!-- Chat Modal -->
+                                            <div class="modal fade" id="chatModal-@property.PropertyId" tabindex="-1" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header bg-primary text-white">
+                                                            <h5 class="modal-title">Contact About: @property.Title</h5>
+                                                            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <form method="post" action="@Url.Action("StartChat", "Chat")">
+                                                            <input type="hidden" name="propertyId" value="@property.PropertyId" />
+                                                            <input type="hidden" name="propertyOwnerId" value="@property.UserId" />
+
+                                                            <div class="modal-body">
+                                                                <div class="mb-3">
+                                                                    <label class="form-label">Your Message</label>
+                                                                    <textarea class="form-control" name="initialMessage" rows="4" required placeholder="Hi, I'm interested in this property..."></textarea>
+                                                                </div>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                                                <button type="submit" class="btn btn-primary">Send Message</button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        }
+                                        <a href="@Url.Action("Details", "Properties", new { id = property.PropertyId })" class="btn btn-sm btn-outline-primary ms-2">
+                                            <i class="fas fa-info-circle"></i> Details
+                                        </a>
                                     </div>
                                 </div>
                             </div>

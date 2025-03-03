@@ -6,6 +6,7 @@ using HomeHutBD.ViewModels;
 using System;
 using System.Security.Cryptography;
 using System.Text;
+using HomeHutBD.Helpers;
 
 namespace HomeHutBD.Controllers
 {
@@ -175,6 +176,52 @@ namespace HomeHutBD.Controllers
                 return RedirectToAction("Login");
             }
             return View(model);
+        }
+
+        // GET: /Account/Profile
+        [Authorize]
+        public IActionResult Profile()
+        {
+            int userId = HttpContext.Session.GetInt32("UserId").Value;
+            var user = _context.Users.FirstOrDefault(u => u.UserId == userId);
+
+            if (user == null)
+            {
+                return RedirectToAction("Login");
+            }
+
+            return View(user);
+        }
+
+
+        // POST: /Account/UpdateProfile
+        [HttpPost]
+        [Authorize]
+        [ValidateAntiForgeryToken]
+        public IActionResult UpdateProfile(Users model)
+        {
+            int userId = HttpContext.Session.GetInt32("UserId").Value;
+            var user = _context.Users.FirstOrDefault(u => u.UserId == userId);
+
+            if (user == null)
+            {
+                return RedirectToAction("Login");
+            }
+
+            // Update user properties
+            user.FirstName = model.FirstName;
+            user.LastName = model.LastName;
+            user.Email = model.Email;
+            user.PhoneNumber = model.PhoneNumber;
+            user.ProfileImage = model.ProfileImage;
+
+            _context.SaveChanges();
+
+            // Update session
+            HttpContext.Session.SetString("Username", user.Username);
+
+            TempData["SuccessMessage"] = "Profile updated successfully.";
+            return RedirectToAction("Profile");
         }
 
         private string ComputeSha256Hash(string rawData)
