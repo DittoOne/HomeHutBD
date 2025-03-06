@@ -9,16 +9,19 @@ builder.Services.AddControllersWithViews();
 
 // Register ApplicationDbContext
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnectionString")));
+options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnectionString")));
 
 // Add session support
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession(options =>
 {
-    options.IdleTimeout = TimeSpan.FromMinutes(30);
+    options.IdleTimeout = TimeSpan.FromHours(1); //1 hour
     options.Cookie.HttpOnly = true;
     options.Cookie.IsEssential = true;
 });
+
+builder.Services.AddHttpContextAccessor();
+
 
 // Add a hosted service (e.g., for a Flask API)
 builder.Services.AddHostedService<FlaskServiceManager>();

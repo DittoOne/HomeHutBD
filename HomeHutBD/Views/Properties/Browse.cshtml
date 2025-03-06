@@ -105,31 +105,39 @@
                                                 <i class="fas fa-comments"></i> Chat
                                             </button>
 
-                                            <div class="modal fade" id="chatModal-@property.PropertyId" tabindex="-1" aria-labelledby="chatModalLabel-@property.PropertyId" aria-hidden="true">
+                                            <!-- Chat Modal -->
+                                            <div class="modal fade chat-modal" id="chatModal-@property.PropertyId" tabindex="-1" aria-labelledby="chatModalLabel-@property.PropertyId" aria-hidden="true">
                                                 <div class="modal-dialog modal-dialog-centered">
                                                     <div class="modal-content">
+                                                        <!-- Modal Header -->
                                                         <div class="modal-header bg-primary text-white">
-                                                            <h5 class="modal-title" id="chatModalLabel-@property.PropertyId">Contact About: @property.Title</h5>
+                                                            <h5 class="modal-title">Contact About: @property.Title</h5>
                                                             <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
-                                                        <form method="post" action="@Url.Action("StartChat", "Chat")">
-                                                            <input type="hidden" name="propertyId" value="@property.PropertyId" />
-                                                            <input type="hidden" name="propertyOwnerId" value="@property.UserId" />
 
-                                                            <div class="modal-body">
+                                                        <!-- Modal Body -->
+                                                        <div class="modal-body">
+                                                            <form method="post" action="@Url.Action("StartChat", "Chat")">
+                                                                <input type="hidden" name="propertyId" value="@property.PropertyId" />
+                                                                <input type="hidden" name="propertyOwnerId" value="@property.UserId" />
+
                                                                 <div class="mb-3">
                                                                     <label class="form-label">Your Message</label>
                                                                     <textarea class="form-control" name="initialMessage" rows="4" required placeholder="Hi, I'm interested in this property..."></textarea>
                                                                 </div>
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                                                                <button type="submit" class="btn btn-primary">Send Message</button>
-                                                            </div>
-                                                        </form>
+
+                                                                <div class="d-flex justify-content-end">
+                                                                    <button type="button" class="btn btn-secondary me-2" data-bs-dismiss="modal">Cancel</button>
+                                                                    <button type="submit" class="btn btn-primary">Send Message</button>
+                                                                </div>
+                                                            </form>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
+
+
+
                                         }
                                         <a href="@Url.Action("Details", "Properties", new { id = property.PropertyId })" class="btn btn-sm btn-outline-primary ms-2">
                                             <i class="fas fa-info-circle"></i> Details
@@ -147,18 +155,10 @@
 
 @section Scripts {
     <script>
-        // Ensure modals work correctly
-        $(document).ready(function() {
-            // Prevent modal from closing when clicking inside textarea
-            $('.modal-body textarea').on('click', function(e) {
-                e.stopPropagation();
-            });
-
-            // Initialize tooltips if you're using them
-            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
-            var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-                return new bootstrap.Tooltip(tooltipTriggerEl)
-            });
+        document.addEventListener("DOMContentLoaded", function () {
+            var myModal = new bootstrap.Modal(document.getElementById('myModal'));
+            myModal.show();
         });
+
     </script>
 }
