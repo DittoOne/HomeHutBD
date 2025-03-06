@@ -30,6 +30,8 @@ namespace HomeHutBD.Models
 
         public string ProfileImage { get; set; }
 
+        public bool IsVerified { get; set; } = false;
+
         public DateTime CreatedAt { get; set; } = DateTime.Now;
     }
 }

@@ -40,11 +40,8 @@ namespace HomeHutBD.Models
         [Column(TypeName = "decimal(12,2)")]
         public decimal Price { get; set; }
 
-        // We keep the Column attribute so that the DB column is still named "nid_verification".
-        // **Note:** We removed the [ForeignKey("VerificationRequest")] attribute
-        // to avoid conflicts with our Fluent API configuration.
         [Column("nid_verification")]
-        public int VerificationId { get; set; }
+        public int? VerificationId { get; set; }
 
         // Navigation properties
         public Users User { get; set; }

@@ -17,89 +17,89 @@ build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = HomeHutBD
 build_property.RootNamespace = HomeHutBD
-build_property.ProjectDir = J:\HomeHutBD\HomeHutBD\
+build_property.ProjectDir = D:\Rakib\MyProject\HomeHutBD\HomeHutBD\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 8.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = J:\HomeHutBD\HomeHutBD
+build_property.MSBuildProjectDirectory = D:\Rakib\MyProject\HomeHutBD\HomeHutBD
 build_property._RazorSourceGeneratorDebug = 
 build_property.EffectiveAnalysisLevelStyle = 8.0
 build_property.EnableCodeStyleSeverity = 
 
-[J:/HomeHutBD/HomeHutBD/Views/Account/ChangePassword.cshtml]
+[D:/Rakib/MyProject/HomeHutBD/HomeHutBD/Views/Account/ChangePassword.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxDaGFuZ2VQYXNzd29yZC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[J:/HomeHutBD/HomeHutBD/Views/Account/Login.cshtml]
+[D:/Rakib/MyProject/HomeHutBD/HomeHutBD/Views/Account/Login.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxMb2dpbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[J:/HomeHutBD/HomeHutBD/Views/Account/Profile.cshtml]
+[D:/Rakib/MyProject/HomeHutBD/HomeHutBD/Views/Account/Profile.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxQcm9maWxlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[J:/HomeHutBD/HomeHutBD/Views/Account/Register.cshtml]
+[D:/Rakib/MyProject/HomeHutBD/HomeHutBD/Views/Account/Register.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxSZWdpc3Rlci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[J:/HomeHutBD/HomeHutBD/Views/Account/VerifyEmail.cshtml]
+[D:/Rakib/MyProject/HomeHutBD/HomeHutBD/Views/Account/VerifyEmail.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxWZXJpZnlFbWFpbC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[J:/HomeHutBD/HomeHutBD/Views/Chat/Conversation.cshtml]
+[D:/Rakib/MyProject/HomeHutBD/HomeHutBD/Views/Chat/Conversation.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2hhdFxDb252ZXJzYXRpb24uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[J:/HomeHutBD/HomeHutBD/Views/Chat/Index.cshtml]
+[D:/Rakib/MyProject/HomeHutBD/HomeHutBD/Views/Chat/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2hhdFxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[J:/HomeHutBD/HomeHutBD/Views/Home/Index.cshtml]
+[D:/Rakib/MyProject/HomeHutBD/HomeHutBD/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[J:/HomeHutBD/HomeHutBD/Views/prediction/Index.cshtml]
+[D:/Rakib/MyProject/HomeHutBD/HomeHutBD/Views/prediction/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NccHJlZGljdGlvblxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[J:/HomeHutBD/HomeHutBD/Views/Properties/Browse.cshtml]
+[D:/Rakib/MyProject/HomeHutBD/HomeHutBD/Views/Properties/Browse.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvcGVydGllc1xCcm93c2UuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[J:/HomeHutBD/HomeHutBD/Views/Properties/Create.cshtml]
+[D:/Rakib/MyProject/HomeHutBD/HomeHutBD/Views/Properties/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvcGVydGllc1xDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[J:/HomeHutBD/HomeHutBD/Views/Properties/MyProperties.cshtml]
+[D:/Rakib/MyProject/HomeHutBD/HomeHutBD/Views/Properties/MyProperties.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvcGVydGllc1xNeVByb3BlcnRpZXMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[J:/HomeHutBD/HomeHutBD/Views/Shared/Error.cshtml]
+[D:/Rakib/MyProject/HomeHutBD/HomeHutBD/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[J:/HomeHutBD/HomeHutBD/Views/Shared/_AccountLayout.cshtml]
+[D:/Rakib/MyProject/HomeHutBD/HomeHutBD/Views/Shared/_AccountLayout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9BY2NvdW50TGF5b3V0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[J:/HomeHutBD/HomeHutBD/Views/Shared/_LoginPartial.cshtml]
+[D:/Rakib/MyProject/HomeHutBD/HomeHutBD/Views/Shared/_LoginPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9Mb2dpblBhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[J:/HomeHutBD/HomeHutBD/Views/Shared/_ValidationScriptsPartial.cshtml]
+[D:/Rakib/MyProject/HomeHutBD/HomeHutBD/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[J:/HomeHutBD/HomeHutBD/Views/_ViewImports.cshtml]
+[D:/Rakib/MyProject/HomeHutBD/HomeHutBD/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[J:/HomeHutBD/HomeHutBD/Views/_ViewStart.cshtml]
+[D:/Rakib/MyProject/HomeHutBD/HomeHutBD/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[J:/HomeHutBD/HomeHutBD/Views/Shared/_Layout.cshtml]
+[D:/Rakib/MyProject/HomeHutBD/HomeHutBD/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-17upwkfnbi

@@ -59,18 +59,38 @@ namespace HomeHutBD.Controllers
             return View();
         }
 
+
         [HttpPost]
         [Authorize]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Properties property)
         {
+            // Remove User and VerificationRequest from validation
+            ModelState.Remove("User");
+            ModelState.Remove("VerificationRequest");
+
             if (ModelState.IsValid)
             {
-                // Set the current user as the owner
-                property.UserId = HttpContext.Session.GetInt32("UserId").Value;
+                // Get current user
+                int userId = HttpContext.Session.GetInt32("UserId").Value;
+                var user = await _context.Users.FindAsync(userId);
 
-                // Default values
+                // Check if user is verified
+                if (!user.IsVerified)
+                {
+                    // Instead of redirecting to verification page, just show message and return to Home
+                    TempData["ErrorMessage"] = "You need to verify your NID before listing properties. Please contact support.";
+                    return RedirectToAction("Index", "Home");
+                }
+
+                // Set the current user as the owner
+                property.UserId = userId;
                 property.LastUpdate = DateTime.Now;
+                property.VerificationId = null;
+
+                // Explicitly set navigation properties to null
+                property.User = null;
+                property.VerificationRequest = null;
 
                 // Add to database
                 _context.Add(property);

@@ -49,15 +49,14 @@ namespace HomeHutBD.Data
                 .OnDelete(DeleteBehavior.Cascade);
 
             // Properties -> VerificationRequests:
-            // Use NoAction to avoid multiple cascade paths.
             modelBuilder.Entity<Properties>()
                 .HasOne(p => p.VerificationRequest)
                 .WithOne()
                 .HasForeignKey<Properties>(p => p.VerificationId)
+                .IsRequired(false)
                 .OnDelete(DeleteBehavior.NoAction);
 
             // Chats relationships:
-            // Set both Sender and Receiver to NoAction to eliminate multiple cascade paths.
             modelBuilder.Entity<Chats>()
                 .HasOne(c => c.Sender)
                 .WithMany()

@@ -71,22 +71,23 @@
                         </div>
 
                         <div class="row mb-3">
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <label asp-for="Price" class="form-label">Price* (৳)</label>
                                 <input asp-for="Price" class="form-control" type="number" min="0" placeholder="Price in BDT" />
                                 <span asp-validation-for="Price" class="text-danger"></span>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <label class="form-label">Property Image (URL)</label>
                                 <input asp-for="ImageUrl" class="form-control" placeholder="Image URL" />
                                 <span asp-validation-for="ImageUrl" class="text-danger"></span>
                             </div>
+                            <div class="col-md-4">
+                                <label class="form-label">Floor Plan (URL)</label>
+                                <input asp-for="FloorPlan" class="form-control" placeholder="FloorPlan URL" />
+                                <span asp-validation-for="FloorPlan" class="text-danger"></span>
+                            </div>
                         </div>
 
-                        <!-- We need to add a verification ID but since it's a required field,
-                             we're adding a hidden input with a default value. In a real app,
-                             this would be handled properly with verification system -->
-                        <input type="hidden" asp-for="VerificationId" value="1" />
 
                         <div class="d-grid gap-2">
                             <button type="submit" class="btn btn-primary">
