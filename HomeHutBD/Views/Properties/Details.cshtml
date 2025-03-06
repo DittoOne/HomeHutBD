@@ -1,0 +1,215 @@
+﻿@model HomeHutBD.Models.Properties
+@{
+    ViewData["Title"] = Model.Title;
+    var similarProperties = ViewData["SimilarProperties"] as List<HomeHutBD.Models.Properties>;
+}
+
+<div class="container py-5">
+    <nav aria-label="breadcrumb" class="mb-4">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="@Url.Action("Index", "Home")">Home</a></li>
+            <li class="breadcrumb-item"><a href="@Url.Action("Browse", "Properties")">Properties</a></li>
+            <li class="breadcrumb-item active" aria-current="page">@Model.Title</li>
+        </ol>
+    </nav>
+
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="property-main-image mb-4">
+                <div class="badge @(Model.Purpose == "Rent" ? "bg-info" : "bg-success") position-absolute m-3">
+                    @(Model.Purpose == "Rent" ? "For Rent" : "For Sale")
+                </div>
+                <img src="@(string.IsNullOrEmpty(Model.ImageUrl) ? "/api/placeholder/800/500" : Model.ImageUrl)"
+                     alt="@Model.Title" class="img-fluid rounded shadow-sm w-100" style="object-fit: cover; height: 400px;">
+            </div>
+
+            <h1 class="mb-3">@Model.Title</h1>
+            <p class="mb-2 text-primary fs-5">৳ @Model.Price.ToString("N0")</p>
+            <p class="mb-4 fs-5"><i class="fas fa-map-marker-alt me-2"></i>@Model.Address</p>
+
+            <div class="row mb-4">
+                <div class="col-md-3 col-6 mb-3">
+                    <div class="property-feature p-3 text-center bg-light rounded">
+                        <i class="fas fa-bed mb-3 fa-2x text-primary"></i>
+                        <h5 class="mb-0">@Model.Bedrooms</h5>
+                        <p class="text-muted mb-0">Bedrooms</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6 mb-3">
+                    <div class="property-feature p-3 text-center bg-light rounded">
+                        <i class="fas fa-bath mb-3 fa-2x text-primary"></i>
+                        <h5 class="mb-0">@Model.Bathrooms</h5>
+                        <p class="text-muted mb-0">Bathrooms</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6 mb-3">
+                    <div class="property-feature p-3 text-center bg-light rounded">
+                        <i class="fas fa-vector-square mb-3 fa-2x text-primary"></i>
+                        <h5 class="mb-0">@Model.AreaSqft</h5>
+                        <p class="text-muted mb-0">Square Feet</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6 mb-3">
+                    <div class="property-feature p-3 text-center bg-light rounded">
+                        <i class="fas fa-home mb-3 fa-2x text-primary"></i>
+                        <h5 class="mb-0">@Model.Type</h5>
+                        <p class="text-muted mb-0">Property Type</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card mb-4">
+                <div class="card-header bg-white">
+                    <h4 class="mb-0">Description</h4>
+                </div>
+                <div class="card-body">
+                    <p>Description of the property is not available</p>
+                </div>
+            </div>
+
+
+            <div class="card mb-4">
+                <div class="card-header bg-white">
+                    <h4 class="mb-0">Location</h4>
+                </div>
+                <div class="card-body">
+                    <div class="ratio ratio-16x9">
+                        <iframe width="600"
+                                height="450"
+                                frameborder="0" style="border:0"
+                                allowfullscreen
+                                src="https://www.google.com/maps?q=@Uri.EscapeDataString(Model.Address)&output=embed">
+                        </iframe>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4">
+            <div class="card mb-4 " style="top: 20px; z-index: 1;">
+                <div class="card-header bg-white">
+                    <h4 class="mb-0">Contact Owner</h4>
+                </div>
+                <div class="card-body">
+                    <div class="mb-4 text-center">
+                        @if (string.IsNullOrEmpty(Model.User.ProfileImage))
+                        {
+                            <i class="fas fa-user-circle fa-5x text-primary"></i>
+                        }
+                        else
+                        {
+                            <img src="@Model.User.ProfileImage" alt="@Model.User.Username" class="rounded-circle" style="width: 80px; height: 80px; object-fit: cover;">
+                        }
+                        <h5 class="mt-3 mb-0">@Model.User.FirstName @Model.User.LastName</h5>
+                        <p class="text-muted">@@@Model.User.Username</p>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Your Message</label>
+                        <textarea class="form-control" rows="4" placeholder="I'm interested in this property..."></textarea>
+                    </div>
+
+                    @if (Context.Session.GetInt32("UserId").HasValue)
+                    {
+                        @if (Context.Session.GetInt32("UserId") != Model.UserId)
+                        {
+                                @if (Context.Session.GetInt32("UserId").HasValue && Context.Session.GetInt32("UserId") != Model.UserId)
+                                {
+                                    <form method="post" action="@Url.Action("SendMessage", "Chat")" class="d-inline">
+                                        @Html.AntiForgeryToken()
+                                        <input type="hidden" name="propertyId" value="@Model.PropertyId" />
+                                        <input type="hidden" name="receiverId" value="@Model.UserId" />
+                                        <input type="hidden" name="message" value="Hi, I'm interested in this property." />
+                                        <button type="submit" class="btn btn-sm btn-primary">
+                                            <i class="fas fa-comments"></i> Chat
+                                        </button>
+                                    </form>
+                                }
+                        }
+                        else
+                        {
+                            <div class="alert alert-info mb-0">
+                                This is your property listing.
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <div class="alert alert-warning mb-3">
+                            Please <a href="@Url.Action("Login", "Account")">login</a> to contact the owner.
+                        </div>
+                    }
+                </div>
+            </div>
+
+            <div class="card mb-4">
+                <div class="card-header bg-white">
+                    <h4 class="mb-0">Property Details</h4>
+                </div>
+                <div class="card-body">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item d-flex justify-content-between px-0">
+                            <span>Property ID</span>
+                            <span class="text-primary">#@Model.PropertyId</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between px-0">
+                            <span>Property Type</span>
+                            <span>@Model.Type</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between px-0">
+                            <span>Purpose</span>
+                            <span>@Model.Purpose</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between px-0">
+                            <span>Bedrooms</span>
+                            <span>@Model.Bedrooms</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between px-0">
+                            <span>Bathrooms</span>
+                            <span>@Model.Bathrooms</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between px-0">
+                            <span>Area</span>
+                            <span>@Model.AreaSqft sq ft</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between px-0">
+                            <span>Price</span>
+                            <span>৳@Model.Price.ToString("N0")</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between px-0">
+                            <span>Listed On</span>
+                            <span>@Model.LastUpdate.ToString("MMM dd, yyyy")</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header bg-white">
+                    <h4 class="mb-0">Share This Property</h4>
+                </div>
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <a href="#" class="btn btn-outline-primary">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="btn btn-outline-info">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="btn btn-outline-success">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                        <a href="#" class="btn btn-outline-danger">
+                            <i class="fab fa-pinterest"></i>
+                        </a>
+                        <a href="#" class="btn btn-outline-secondary">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
