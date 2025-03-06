@@ -1,36 +1,61 @@
 ﻿@model List<HomeHutBD.Controllers.ChatViewModel>
 
 @{
-    ViewData["Title"] = "My Chats";
+    ViewData["Title"] = "My Conversations";
 }
 
 <div class="container py-5">
-    <h2 class="mb-4">My Conversations</h2>
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <h2 class="fw-bold"><i class="fas fa-comments me-2 text-primary"></i>My Conversations</h2>
+        </div>
+        <div class="col-md-6 text-md-end">
+            <a href="@Url.Action("Browse", "Properties")" class="btn btn-outline-primary">
+                <i class="fas fa-search me-2"></i> Find Properties
+            </a>
+        </div>
+    </div>
 
     @if (!Model.Any())
     {
-        <div class="text-center py-5">
-            <i class="fas fa-comments fa-3x text-muted mb-3"></i>
-            <h4>No conversations yet</h4>
-            <p class="text-muted">
-                When you message a property owner or receive messages, they will appear here.
-            </p>
-            <a href="@Url.Action("Browse", "Properties")" class="btn btn-primary mt-3">
-                <i class="fas fa-search me-2"></i> Browse Properties
-            </a>
+        <div class="card shadow-sm rounded border-0">
+            <div class="card-body text-center py-5">
+                <div class="mb-4">
+                    <i class="fas fa-comments fa-4x text-primary opacity-50"></i>
+                </div>
+                <h4 class="mb-3">No conversations yet</h4>
+                <p class="text-muted mb-4">
+                    Your conversations with property owners and interested buyers will appear here.
+                </p>
+                <a href="@Url.Action("Browse", "Properties")" class="btn btn-primary px-4">
+                    <i class="fas fa-search me-2"></i> Browse Properties
+                </a>
+            </div>
         </div>
     }
     else
     {
-        <div class="card">
+        <div class="card shadow-sm border-0 rounded">
             <div class="list-group list-group-flush">
                 @foreach (var chat in Model)
                 {
+                    var timeAgo = GetTimeAgo(chat.LastMessageTime);
+
                     <a href="@Url.Action("Conversation", "Chat", new { propertyId = chat.PropertyId, userId = chat.OtherUserId })"
-                       class="list-group-item list-group-item-action">
-                        <div class="d-flex w-100 justify-content-between align-items-center">
-                            <div>
-                                <h5 class="mb-1">@chat.OtherUserName</h5>
+                       class="list-group-item list-group-item-action p-3 border-start-0 border-end-0">
+                        <div class="row align-items-center">
+                            <div class="col-auto">
+                                <div class="avatar-circle bg-primary text-white">
+                                    @chat.OtherUserName.Substring(0, 1).ToUpper()
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="d-flex w-100 justify-content-between align-items-center">
+                                    <h5 class="mb-1 fw-bold">@chat.OtherUserName</h5>
+                                    <small class="text-muted badge bg-light text-dark">
+                                        @timeAgo
+                                    </small>
+                                </div>
                                 <p class="mb-1 text-truncate" style="max-width: 500px;">
                                     @if (chat.IsLastMessageFromCurrentUser)
                                     {
@@ -38,11 +63,13 @@
                                     }
                                     @chat.LastMessage
                                 </p>
-                                <small class="text-muted">Property: @chat.PropertyTitle</small>
+                                <div class="d-flex align-items-center">
+                                    <small class="text-muted me-2">
+                                        <i class="fas fa-home text-primary me-1"></i>
+                                        Property: @chat.PropertyTitle
+                                    </small>
+                                </div>
                             </div>
-                            <small class="text-muted">
-                                @chat.LastMessageTime.ToString("MMM dd, yyyy HH:mm")
-                            </small>
                         </div>
                     </a>
                 }
@@ -50,3 +77,38 @@
         </div>
     }
 </div>
+
+<style>
+    .avatar-circle {
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+        font-weight: bold;
+    }
+
+    .list-group-item:hover {
+        background-color: #f8f9fa;
+    }
+</style>
+
+@functions {
+    public string GetTimeAgo(DateTime dateTime)
+    {
+        TimeSpan timeSince = DateTime.Now - dateTime;
+
+        if (timeSince.TotalMinutes < 1)
+            return "Just now";
+        if (timeSince.TotalMinutes < 60)
+            return $"{(int)timeSince.TotalMinutes}m ago";
+        if (timeSince.TotalHours < 24)
+            return $"{(int)timeSince.TotalHours}h ago";
+        if (timeSince.TotalDays < 7)
+            return $"{(int)timeSince.TotalDays}d ago";
+
+        return dateTime.ToString("MMM dd");
+    }
+}

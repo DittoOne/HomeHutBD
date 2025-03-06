@@ -113,10 +113,21 @@ namespace HomeHutBD.Controllers
         {
             if (string.IsNullOrWhiteSpace(message))
             {
+                // Redirect back to the relevant page
+                if (Request.Headers["Referer"].ToString().Contains("Properties/Details"))
+                {
+                    return RedirectToAction("Details", "Properties", new { id = propertyId });
+                }
                 return RedirectToAction("Conversation", new { propertyId, userId = receiverId });
             }
 
             int currentUserId = HttpContext.Session.GetInt32("UserId").Value;
+
+            // Don't allow chatting with yourself
+            if (currentUserId == receiverId)
+            {
+                return RedirectToAction("Details", "Properties", new { id = propertyId });
+            }
 
             var newMessage = new Chats
             {
@@ -130,40 +141,8 @@ namespace HomeHutBD.Controllers
             _context.Chats.Add(newMessage);
             await _context.SaveChangesAsync();
 
+            // Always redirect to the conversation page
             return RedirectToAction("Conversation", new { propertyId, userId = receiverId });
-        }
-
-        [HttpPost]
-        [Authorize]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> StartChat(int propertyId, int propertyOwnerId, string initialMessage)
-        {
-            if (string.IsNullOrWhiteSpace(initialMessage))
-            {
-                return RedirectToAction("Details", "Properties", new { id = propertyId });
-            }
-
-            int currentUserId = HttpContext.Session.GetInt32("UserId").Value;
-
-            // Don't allow chatting with yourself
-            if (currentUserId == propertyOwnerId)
-            {
-                return RedirectToAction("Details", "Properties", new { id = propertyId });
-            }
-
-            var newMessage = new Chats
-            {
-                SenderId = currentUserId,
-                ReceiverId = propertyOwnerId,
-                PropertyId = propertyId,
-                Message = initialMessage,
-                Timestamp = DateTime.Now
-            };
-
-            _context.Chats.Add(newMessage);
-            await _context.SaveChangesAsync();
-
-            return RedirectToAction("Conversation", new { propertyId, userId = propertyOwnerId });
         }
     }
 
