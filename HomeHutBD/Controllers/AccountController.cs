@@ -198,30 +198,99 @@ namespace HomeHutBD.Controllers
         [HttpPost]
         [Authorize]
         [ValidateAntiForgeryToken]
-        public IActionResult UpdateProfile(Users model)
+        public async Task<IActionResult> UpdateProfile(Users model)
         {
+            // Get the current user ID from session
             int userId = HttpContext.Session.GetInt32("UserId").Value;
-            var user = _context.Users.FirstOrDefault(u => u.UserId == userId);
+
+            // Find the user in the database
+            var user = await _context.Users.FindAsync(userId);
 
             if (user == null)
             {
+                TempData["ErrorMessage"] = "User not found.";
                 return RedirectToAction("Login");
             }
 
-            // Update user properties
-            user.FirstName = model.FirstName;
-            user.LastName = model.LastName;
-            user.Email = model.Email;
-            user.PhoneNumber = model.PhoneNumber;
-            user.ProfileImage = model.ProfileImage;
+            // Validate inputs
+            if (string.IsNullOrWhiteSpace(model.FirstName))
+            {
+                ModelState.AddModelError("FirstName", "First name is required.");
+            }
 
-            _context.SaveChanges();
+            if (string.IsNullOrWhiteSpace(model.LastName))
+            {
+                ModelState.AddModelError("LastName", "Last name is required.");
+            }
 
-            // Update session
-            HttpContext.Session.SetString("Username", user.Username);
+            if (string.IsNullOrWhiteSpace(model.Email))
+            {
+                ModelState.AddModelError("Email", "Email is required.");
+            }
+            else if (model.Email != user.Email)
+            {
+                // Check if the new email is already in use by another user
+                if (_context.Users.Any(u => u.Email == model.Email && u.UserId != userId))
+                {
+                    ModelState.AddModelError("Email", "This email is already in use by another account.");
+                }
+            }
 
-            TempData["SuccessMessage"] = "Profile updated successfully.";
-            return RedirectToAction("Profile");
+            if (string.IsNullOrWhiteSpace(model.PhoneNumber))
+            {
+                ModelState.AddModelError("PhoneNumber", "Phone number is required.");
+            }
+            else if (model.PhoneNumber != user.PhoneNumber)
+            {
+                // Check if the new phone number is already in use by another user
+                if (_context.Users.Any(u => u.PhoneNumber == model.PhoneNumber && u.UserId != userId))
+                {
+                    ModelState.AddModelError("PhoneNumber", "This phone number is already in use by another account.");
+                }
+            }
+
+            // If there are validation errors, return to the profile view with errors
+            if (!ModelState.IsValid)
+            {
+                // We need to fetch the full user object again to pass to the view
+                return View("Profile", user);
+            }
+
+            try
+            {
+                // Update user properties
+                user.FirstName = model.FirstName;
+                user.LastName = model.LastName;
+                user.Email = model.Email;
+                user.PhoneNumber = model.PhoneNumber;
+
+                // Only update profile image if a new URL is provided
+                if (!string.IsNullOrWhiteSpace(model.ProfileImage))
+                {
+                    user.ProfileImage = model.ProfileImage;
+                }
+
+                // Save changes to database
+                await _context.SaveChangesAsync();
+
+                // Update session data
+                HttpContext.Session.SetString("Username", user.Username);
+
+                // Add success message
+                TempData["SuccessMessage"] = "Profile updated successfully.";
+
+                return RedirectToAction("Profile");
+            }
+            catch (Exception ex)
+            {
+                //// Log the exception
+                //_logger.LogError(ex, "Error updating profile for user {UserId}", userId);
+
+                // Add error message
+                TempData["ErrorMessage"] = "An error occurred while updating your profile. Please try again.";
+
+                return View("Profile", user);
+            }
         }
 
         private string ComputeSha256Hash(string rawData)

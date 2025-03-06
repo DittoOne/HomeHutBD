@@ -30,7 +30,7 @@ namespace HomeHutBD.Controllers
             return View(featuredProperties);
         }
 
-        public IActionResult Privacy()
+        public IActionResult About()
         {
             return View();
         }

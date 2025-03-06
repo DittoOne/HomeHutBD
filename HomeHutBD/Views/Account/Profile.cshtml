@@ -3,6 +3,21 @@
     ViewData["Title"] = "My Profile";
 }
 
+@if (!ViewData.ModelState.IsValid)
+{
+    <div class="alert alert-danger">
+        <ul>
+            @foreach (var modelState in ViewData.ModelState.Values)
+            {
+                foreach (var error in modelState.Errors)
+                {
+                    <li>@error.ErrorMessage</li>
+                }
+            }
+        </ul>
+    </div>
+}
+
 <div class="container py-5">
     <div class="row">
         <div class="col-md-4">
@@ -50,6 +65,7 @@
                 </div>
                 <div class="card-body">
                     <form method="post" action="@Url.Action("UpdateProfile", "Account")">
+                        @Html.AntiForgeryToken()
                         <div class="row mb-3">
                             <div class="col-md-6">
                                 <label class="form-label">First Name</label>
@@ -65,7 +81,9 @@
                             <label class="form-label">Email</label>
                             <input type="email" class="form-control" name="Email" value="@Model.Email">
                         </div>
-
+                        <input type="hidden" name="UserId" value="@Model.UserId" />
+                        <input type="hidden" name="Username" value="@Model.Username" />
+                        <input type="hidden" name="Password" value="@Model.Password" />
                         <div class="mb-3">
                             <label class="form-label">Phone Number</label>
                             <input type="tel" class="form-control" name="PhoneNumber" value="@Model.PhoneNumber">
