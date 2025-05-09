@@ -30,7 +30,7 @@ An intelligent property listing and pricing platform powered by ASP.NET MVC and 
 * [📦 Tech Stack](#-tech-stack)
 * [🚀 Getting Started](#-getting-started)
 * [📁 Project Structure](#-project-structure)
-* [🗂️ ER Diagram](#-er-diagram)
+* [🗂️ ER Diagram](#er-diagram)
 * [🤖 ML Model Details](#-ml-model-details)
 * [🎥 Live Demo](#-live-demo)
 * [👨‍💻 Team](#-team)
@@ -177,10 +177,8 @@ HomeHutBD/
 
 </details>
 
----
 
 ## 🗂️ ER Diagram
-
 
 <details>
 <summary><strong>Click to expand ER Diagram</strong></summary>
